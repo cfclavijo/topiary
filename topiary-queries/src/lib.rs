@@ -52,3 +52,9 @@ pub fn toml() -> &'static str {
 pub fn tree_sitter_query() -> &'static str {
     include_str!("../queries/tree-sitter-query.scm")
 }
+
+/// Returns the Topiary-compatible query file for Erlang.
+#[cfg(feature = "erlang")]
+pub fn erlang() -> &'static str {
+    include_str!("../queries/erlang.scm")
+}

@@ -87,6 +87,18 @@ rust() {
   echo -e "${GREEN}Rust: Done${NC}"
 }
 
+erlang() {
+  echo -e "${BLUE}Erlang: Fetching${NC}"
+  git clone --depth=1 https://github.com/WhatsApp/tree-sitter-erlang.git "${WORKDIR}/tree-sitter-erlang" &> /dev/null
+  REV=$(ref_for_language "erlang")
+  pushd "${WORKDIR}/tree-sitter-erlang" &> /dev/null
+    git checkout "$REV" &> /dev/null
+  popd &> /dev/null
+  echo -e "${ORANGE}Erlang: Building${NC}"
+  tree-sitter build-wasm "${WORKDIR}/tree-sitter-erlang"
+  echo -e "${GREEN}Erlang: Done${NC}"
+}
+
 
 toml() {
   echo -e "${BLUE}TOML: Fetching${NC}"
@@ -112,6 +124,7 @@ tree-sitter-query() {
   echo -e "${GREEN}Query: Done${NC}"
 }
 
-(trap 'kill 0' SIGINT; json & nickel & ocaml & ocamllex & rust & toml & tree-sitter-query & wait)
+(trap 'kill 0' SIGINT; json & nickel & ocaml & ocamllex & rust & erlang & toml & tree-sitter-query & wait)
+
 
 echo -e "${GREEN}Done! All grammars have been updated${NC}"

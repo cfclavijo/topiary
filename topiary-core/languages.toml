@@ -28,6 +28,10 @@ extensions = ["rs"]
 indent = "    " # 4 spaces
 
 [[language]]
+name = "erlang"
+extensions = ["erl"]
+
+[[language]]
 name = "toml"
 extensions = ["toml"]
 
